@@ -5,7 +5,10 @@ public class Managers : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     static Managers s_instance; // 유일성 보장
-    public static Managers Instance {get { init(); return s_instance;}} // 유일한 매니저를 가져온다.
+    static Managers Instance {get { init(); return s_instance;}} // 유일한 매니저를 가져온다.
+
+    InputManager _input = new InputManager();
+    public static InputManager input {get { return Instance._input; } }
     void Start()
     {
         init();
@@ -14,7 +17,7 @@ public class Managers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        _input.OnUpdate();
     }
 
     static void init()
