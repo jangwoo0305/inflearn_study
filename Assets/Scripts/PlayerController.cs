@@ -3,7 +3,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-
+class Tank
+{
+    public float speed = 15.0f;
+}
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
@@ -13,6 +16,10 @@ public class PlayerController : MonoBehaviour
     {
         Managers.input.KeyAction -= OnKeyboard;
         Managers.input.KeyAction += OnKeyboard;
+
+        Tank tank1 = new Tank();
+        Tank tank2 = new Tank();
+        Tank tank3 = new Tank();
     }
 
     float _yangle = 0.0f;
