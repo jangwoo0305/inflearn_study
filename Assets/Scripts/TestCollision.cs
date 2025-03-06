@@ -8,7 +8,7 @@ public class TestCollision : MonoBehaviour
     // 3) 상대한테 Collider가 있어야 한다.(IsTrigger : off)
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log($"Collision @ {collision.gameObject.name}");
+        // Debug.Log($"Collision @ {collision.gameObject.name}");
     }
 
     // 1) 둘 다 Collider가 있어야 한다.
@@ -16,7 +16,7 @@ public class TestCollision : MonoBehaviour
     // 3) 둘 중 하나는 Rigidbody가 있어야 한다.
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($" Trigger @{other.gameObject.name}");            
+        // Debug.Log($" Trigger @{other.gameObject.name}");            
     }
     void Start()
     {
@@ -40,10 +40,14 @@ public class TestCollision : MonoBehaviour
 
             Debug.DrawRay(Camera.main.transform.position, ray.direction * 100.0f, Color.red, 1.0f);
 
+            LayerMask mask = LayerMask.GetMask("Monster") | LayerMask.GetMask("Wall"); // 아래와 같음
+            // int mask = (1 << 8) | (1 << 9); //
+
             RaycastHit hit;
-            if(Physics.Raycast(ray, out hit, 100.0f))
+            if(Physics.Raycast(ray, out hit, 100.0f, mask)) //768;을 사용해서 2의 8승과 2의 9승을 더한 숫자를 입력해도 된ㅏ.
             {
-                Debug.Log($"Raycast Camera @ {hit.collider.gameObject.name}");
+                Debug.Log($"Raycast Camera @ {hit.collider.gameObject.tag}"); // ray가 닿은 물체의 tag를 출력
+                Debug.Log($"Raycast Camera @ {hit.collider.gameObject.name}"); // ray가 닿은 물체의 name을 출력
             }
         }
 
